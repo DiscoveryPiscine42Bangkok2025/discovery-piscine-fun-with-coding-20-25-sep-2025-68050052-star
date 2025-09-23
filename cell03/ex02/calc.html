@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Calculator</title>
+</head>
+<body>
+<form id="calcForm">
+<input type="text" id="left" value="0">
+<select id="op">
+<option value="+">+</option>
+<option value="-">-</option>
+<option value="*">*</option>
+<option value="/">/</option>
+<option value="%">%</option>
+</select>
+<input type="text" id="right" value="0">
+<input type="submit" value="Try me!">
+</form>
+
+
+<script>
+const form = document.getElementById('calcForm');
+const left = document.getElementById('left');
+const right = document.getElementById('right');
+const op = document.getElementById('op');
+
+
+function isNonNegativeInteger(str) {
+return /^\d+$/.test(str);
+}
+
+
+form.addEventListener('submit', function(e){
+e.preventDefault();
+const l = left.value.trim();
+const r = right.value.trim();
+if (!isNonNegativeInteger(l) || !isNonNegativeInteger(r)) {
+alert('Error :(');
+return;
+}
+const a = Number(l);
+const b = Number(r);
+if ((op.value === '/' || op.value === '%') && b === 0) {
+alert("It's over 9000!");
+console.log("It's over 9000!");
+return;
+}
+let result;
+switch(op.value) {
+case '+': result = a + b; break;
+case '-': result = a - b; break;
+case '*': result = a * b; break;
+case '/': result = a / b; break;
+case '%': result = a % b; break;
+}
+alert(result);
+console.log(result);
+});
+
+
+setInterval(() => alert('Please, use me...'), 30000);
+</script>
+</body>
+</html>
